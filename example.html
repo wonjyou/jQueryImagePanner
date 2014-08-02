@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]>
+<!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>Fullscreen image panner</title>
+	<style type="text/css">
+		html, body{
+			height:100%;
+		}
+		body {
+			margin:0; padding:0;
+		}
+		
+		#loading { position: fixed; top: 0; width:100%; height:100%; background: #201E20; z-index: 999999; display: block !important; }
+		#loading img { position: fixed; top: 50%; left: 50%; margin: -25px 0 0 -25px; }	
+		
+		#imageWrapper{position:relative; overflow:hidden; height:100%; width:100%;}
+		#imageWrapper .container{position:relative; left:0;}
+		#imageWrapper .pan{position:absolute}
+	</style>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+    <!-- Hook up a basic loader -->
+	<script type="text/javascript">
+		$(window).load(function() {
+			$("#loading").fadeOut("1000", function() {
+			// Animation complete
+				$('#loading img').css("display","none");
+				$('#loading').css("display","none");
+				$('#loading').css("background","none");
+				$('#loading').css("width","0");
+				$('#loading').css("height","0");
+		  	});
+		});
+	</script>
+</head>
+
+<body>
+	<!-- Loader -->
+	<div id="loading">
+    	<img src="images/loader.gif" alt="Loader"/>
+    </div>
+	
+	<div id="imageWrapper">
+		<div class="container">
+			<img src="images/mountain.jpg" class="pan" />
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery.easing.1.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery.fitToWindow.js"></script>
+	<script type="text/javascript" src="js/jquery.image.panner.js"></script>
+	<script>
+	$(function() {
+
+		$(".pan").fitToWindow({container:"#imageWrapper", centerImage:false, callback: function(){
+				$("#imageWrapper").imagePanner();
+			}
+		});
+
+		//$imagePan_panning.css("margin-left",($imagePan.width()-$imagePan_panning.width())/2).css("margin-top",($imagePan.height()-$imagePan_panning.height())/2);
+
+	});
+
+	</script>
+</body>
+</html>
